@@ -1,0 +1,38 @@
+div.header {
+  overflow: hidden;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+}
+
+ul.leftnav {
+  float: left;
+  overflow: hidden;
+}
+
+ul.rightnav {
+  float: right;
+  overflow: hidden;
+}
+
+ul.leftnav li {
+  float: left;
+  padding: 0 10px;
+}
+
+ul.rightnav li {
+  float: left;
+  padding-right: 10px;
+}
+
+ul.leftnav li a {
+  color: #202124;
+}
+
+ul.rightnav li a {
+  font-size: 13px;
+  color: #000;
+}
