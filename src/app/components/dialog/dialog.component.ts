@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {User, UserData} from "../User";
-import {UserService} from "../services/user.service";
+import {User, UserData} from "../../User";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-dialog',

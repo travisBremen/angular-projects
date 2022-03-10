@@ -33,7 +33,7 @@ form div.input-container>fa-icon {
 
 form div.input-container>input {
     padding-left: 45px;
-    padding-right: 0px;
+    padding-right: 0;
 }
 
 form div.input-container>button {

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserData} from "../User";
+import {UserData} from "../../User";
 
 @Component({
   selector: 'app-user-item',
