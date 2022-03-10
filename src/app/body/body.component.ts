@@ -19,21 +19,14 @@ export class BodyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getUser() {
-    console.log('get user!')
-    this.openDialog();
-  }
-
   openDialog(): void {
-    console.log('haasdfasasasasasasasasasasasas');
     const dialogRef = this.dialog.open(DialogComponent, {
       height: '600px',
-      width: '800px',
+      width: '1000px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-    console.log('dgf55555555555555555555555555');
   }
 }

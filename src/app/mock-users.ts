@@ -1,6 +1,6 @@
-import {User} from "./User";
+import {UserData} from "./User";
 
-export const USERS: User[] = [
+export const USERS: UserData[] = [
   {
     "id": 7,
     "email": "michael.lawson@reqres.in",
