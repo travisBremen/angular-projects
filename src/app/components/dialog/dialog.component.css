@@ -4,13 +4,6 @@ div.dialog-container {
 }
 
 .dialog-container > .user-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  background-color: #f1f1f1;
-  width: 200px;
-  height: 220px;
-  margin: 5px;
-  text-align: center;
+
+
 }

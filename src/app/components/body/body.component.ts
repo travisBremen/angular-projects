@@ -20,10 +20,7 @@ export class BodyComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      height: '600px',
-      width: '1000px',
-    });
+    const dialogRef = this.dialog.open(DialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

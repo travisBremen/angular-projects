@@ -1,5 +1,26 @@
-<div>
-  <h4>{{userData.first_name}} {{userData.last_name}}</h4>
-  <p>{{userData.email}}</p>
-  <img src="{{userData.avatar}}" alt="">
+<div class="user">
+  <div class="user-info">
+    <h4>{{userData.first_name}} {{userData.last_name}}</h4>
+    <p>{{userData.email}}</p>
+    <img src="{{userData.avatar}}" alt="">
+  </div>
+  <div class="user-buttons">
+    <button type="button" (click)="toggleUpdate()">Update</button>
+    <button type="button" (click)="onDelete(userData)">Delete</button>
+  </div>
+  <form *ngIf="showUpdate" class="update-form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <label for="fName">First Name</label>
+      <input type="text" name="fName" [(ngModel)]="fName" id="fName" placeholder="First Name">
+    </div>
+    <div class="form-control">
+      <label for="lName">Last Name</label>
+      <input type="text" name="lName" [(ngModel)]="lName" id="lName" placeholder="Last Name">
+    </div>
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input type="text" name="email" [(ngModel)]="email" id="email" placeholder="Email">
+    </div>
+    <input type="submit" value="Update User Info" class="submit">
+  </form>
 </div>

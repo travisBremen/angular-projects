@@ -4,6 +4,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from "@angular/material/dialog";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 import {AppComponent} from './app.component';
 import {BodyComponent} from './components/body/body.component';
@@ -13,6 +14,8 @@ import {FootComponent} from './components/foot/foot.component';
 import {DialogComponent} from './components/dialog/dialog.component';
 import {UserItemComponent} from './components/user-item/user-item.component';
 import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import {MatButtonModule} from "@angular/material/button";
     BrowserAnimationsModule,
     MatDialogModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

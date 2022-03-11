@@ -1,7 +1,79 @@
+div.user {
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*box-sizing: border-box;*/
+  width: 200px;
+  /*height: 360px;*/
+  margin: 10px;
+  text-align: center;
+}
+
+div.user-info {
+  background-color: #f1f1f1;
+  /*margin-bottom: 10px;*/
+  padding: 10px;
+}
+
 h4 {
-  margin:0;
+  margin: 0;
 }
 
 p {
+  margin: 8px 0;
+}
+
+div.user-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  background-color: #f1f1f1;
   margin: 10px 0;
+  padding: 5px;
+}
+
+.user-buttons > button {
+  margin: 0 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+  padding: 5px 20px;
+  font-size: 13px;
+  border-radius: 4px;
+  color: #3c4043;
+  cursor: pointer;
+}
+
+.update-form {
+  background-color: #f1f1f1;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+}
+
+.form-control label {
+  margin: 0 5px 10px;
+}
+
+.form-control input {
+  width: 120px;
+  margin: 0 5px 10px;
+}
+
+.submit {
+  width: 100%;
+  /*margin: 0 10px;*/
+  background-color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+  padding: 5px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  color: #3c4043;
+  cursor: pointer;
 }

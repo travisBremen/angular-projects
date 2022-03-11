@@ -1,9 +1,11 @@
 <h3 mat-dialog-title>User List</h3>
 <div mat-dialog-content class="dialog-container">
   <app-user-item
-    *ngFor="let userData of userData"
+    *ngFor="let userData of usersData"
     [userData]="userData"
-    class="user-item">
+    class="user-item"
+    (onUpdateUser)="updateUser($event, userData)"
+    (onDeleteUser)="deleteUser(userData)">
   </app-user-item>
 </div>
 <div mat-dialog-actions align="end">
