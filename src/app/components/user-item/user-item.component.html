@@ -11,15 +11,15 @@
   <form *ngIf="showUpdate" class="update-form" (ngSubmit)="onSubmit()">
     <div class="form-control">
       <label for="fName">First Name</label>
-      <input type="text" name="fName" [(ngModel)]="fName" id="fName" placeholder="First Name">
+      <input type="text" name="fName" [(ngModel)]="userData.first_name" id="fName" placeholder="First Name">
     </div>
     <div class="form-control">
       <label for="lName">Last Name</label>
-      <input type="text" name="lName" [(ngModel)]="lName" id="lName" placeholder="Last Name">
+      <input type="text" name="lName" [(ngModel)]="userData.last_name" id="lName" placeholder="Last Name">
     </div>
     <div class="form-control">
       <label for="email">Email</label>
-      <input type="text" name="email" [(ngModel)]="email" id="email" placeholder="Email">
+      <input type="text" name="email" [(ngModel)]="userData.email" id="email" placeholder="Email">
     </div>
     <input type="submit" value="Update User Info" class="submit">
   </form>

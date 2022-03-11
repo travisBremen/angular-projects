@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserData} from "../../User";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-user-item',
@@ -8,43 +9,25 @@ import {UserData} from "../../User";
 })
 export class UserItemComponent implements OnInit {
   @Input() userData!: UserData;
-  @Output() onUpdateUser: EventEmitter<UserData> = new EventEmitter();
   @Output() onDeleteUser: EventEmitter<UserData> = new EventEmitter<UserData>();
-  fName!: string;
-  lName!: string;
-  email!: string;
   showUpdate: boolean = false;
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    if (!this.fName && !this.lName && !this.email) {
+    if (!this.userData.first_name && !this.userData.last_name && !this.userData.email) {
       alert('Please enter at least one item!')
       return
     }
 
-    // todo 如果input里没有输入值的话，数据类型是undefined => 要处理成''吗？
-    if (!this.fName)
-      this.fName = '';
-    if (!this.lName)
-      this.lName = '';
-    if (!this.email)
-      this.email = '';
-
-    const newUserData: UserData = {
-      email: this.email,
-      first_name: this.fName,
-      last_name: this.lName,
-    }
-    this.onUpdateUser.emit(newUserData);
-
-    this.fName = '';
-    this.lName = '';
-    this.email = '';
+    // 直接在这里处理update的信息
+    this.userService.updateUser(this.userData).subscribe((response) => {
+      console.log(response);
+    });
   }
 
   onDelete(userData: UserData) {
