@@ -3,7 +3,16 @@ div.dialog-container {
   flex-flow: row wrap;
 }
 
-.dialog-container > .user-item {
+h3{
+  margin: 0 0 10px;
+}
 
+label {
+  font-size: 18px;
+  margin-right: 10px;
+}
 
+input {
+  width: 200px;
+  font-size: 18px;
 }

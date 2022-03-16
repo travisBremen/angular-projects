@@ -1,4 +1,9 @@
-<h3 mat-dialog-title>User List</h3>
+<div mat-dialog-title>
+  <h3 mat-dialog-title>User List</h3>
+  <label for="search">Search</label>
+  <input type="text" [(ngModel)]="search" id="search" name="search" placeholder="search"
+  (keyup)="searchUser()">
+</div>
 <div mat-dialog-content class="dialog-container">
   <app-user-item
     *ngFor="let userData of usersData"
