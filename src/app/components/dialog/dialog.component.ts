@@ -11,20 +11,26 @@ import {Subscription} from "rxjs";
 })
 export class DialogComponent implements OnInit {
   usersData: UserData[] = []; // 取回的json里的user data保存在这里了
+  existedData: UserData[] = []; // 用来存放没被删除的数据
+  temStr: string = ''; // 保存当前搜索的关键字
   subscription: Subscription;
 
   constructor(private userService: UserService, public dialogRef: MatDialogRef<DialogComponent>) {
-    this.subscription = this.userService.onUpdate().subscribe((value) => {
-      // 返回对应id的元素已更新，显示update
-      this.usersData[value - 1].update = true;
-    })
+    this.subscription = this.userService.onSearch().subscribe((keyword) => {
+      // 在现存的data中filter关键字
+      this.usersData = this.existedData.filter((user) =>
+        user.first_name.includes(keyword) || user.last_name.includes(keyword));
+
+      // 临时保存搜索的关键字
+      this.temStr = keyword;
+    });
   }
 
   ngOnInit(): void {
-    console.log(this.subscription);
     this.userService.getUser().subscribe((users) => {
       console.log(users);
       this.usersData = users.data;
+      this.existedData = users.data;
     });
   }
 
@@ -34,14 +40,15 @@ export class DialogComponent implements OnInit {
 
   // todo: 每个:void也要显示指明吗
   deleteUser(userData: UserData): void {
-    this.userService.deleteUser(userData).subscribe(() =>
-      this.usersData = this.usersData.filter((data) => data.id !== userData.id)
-    );
-  }
+    this.userService.deleteUser(userData).subscribe(() => {
+      // 展示的data => 没被删除且包含搜索关键字的数据
+      this.usersData = this.existedData.filter((data) =>
+        data.id !== userData.id
+        && (data.first_name.includes(this.temStr) || data.last_name.includes(this.temStr))
+      );
 
-  searchUser() {
-    // this.usersData = this.usersData.filter((user) =>
-    //   user.first_name.includes(this.search) || user.last_name.includes(this.search))
-    // this.userService.searchUser(this.search);
+      // 删除后实际的data
+      this.existedData = this.existedData.filter((data) => data.id !== userData.id);
+    });
   }
 }

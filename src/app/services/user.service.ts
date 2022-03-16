@@ -15,6 +15,7 @@ const httpOptions = {
 export class UserService {
   private apiUrl = "https://reqres.in/api/users"
   public subjectUpdate = new Subject<number>();
+  public subjectSearch = new Subject<string>();
 
   constructor(private http: HttpClient) {
   }
@@ -41,11 +42,7 @@ export class UserService {
     return this.subjectUpdate.asObservable();
   }
 
-  // searchUser(search: string) {
-  //   this.subjectSearch.next(search);
-  // }
-  //
-  // onSearch(): Observable<any> {
-  //   return this.subjectSearch.asObservable();
-  // }
+  onSearch(): Observable<string> {
+    return this.subjectSearch.asObservable();
+  }
 }

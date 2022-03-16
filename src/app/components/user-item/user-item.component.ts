@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserData} from "../../User";
 import {UserService} from "../../services/user.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user-item',
@@ -12,12 +13,13 @@ export class UserItemComponent implements OnInit {
   @Input() userData: UserData = {email: "", first_name: "", last_name: "", update: false};
   @Output() onDeleteUser: EventEmitter<UserData> = new EventEmitter<UserData>();
   showUpdate: boolean = false;
+  subscription: Subscription;
 
   constructor(private userService: UserService) {
-    // this.subscription = this.userService.onSearch().subscribe((value) => {
-    //   // todo: 如果字符串匹配，改变样式？
-    //   console.log(value);
-    // });
+    this.subscription = this.userService.onUpdate().subscribe((id) => {
+      if (this.userData.id === id)
+        this.userData.update = true;
+    });
   }
 
   ngOnInit(): void {

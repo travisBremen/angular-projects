@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-search-user',
@@ -8,13 +9,14 @@ import {Component, OnInit} from '@angular/core';
 export class SearchUserComponent implements OnInit {
   search: string = '';
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
   }
 
-  searchUser() {
-
+  onSearch() {
+    // 告知大家我要search的string
+    this.userService.subjectSearch.next(this.search);
   }
 }
