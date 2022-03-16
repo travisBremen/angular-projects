@@ -14,8 +14,7 @@ const httpOptions = {
 })
 export class UserService {
   private apiUrl = "https://reqres.in/api/users"
-  public subjectUpdate = new Subject<any>();
-  public subjectSearch = new Subject<any>();
+  public subjectUpdate = new Subject<number>();
 
   constructor(private http: HttpClient) {
   }
@@ -38,7 +37,7 @@ export class UserService {
     return this.http.post<UserData>(this.apiUrl, userData, httpOptions);
   }
 
-  onUpdate(): Observable<any> {
+  onUpdate(): Observable<number> {
     return this.subjectUpdate.asObservable();
   }
 
