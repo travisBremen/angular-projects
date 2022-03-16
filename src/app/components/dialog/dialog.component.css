@@ -1,8 +1,20 @@
-div.dialog-container {
-  display: flex;
-  flex-flow: row wrap;
+h2 {
+  margin: 0 0 10px;
 }
 
-h2{
-  margin: 0 0 10px;
+.dialog-content {
+  display: flex;
+  flex-flow: row wrap;
+  width: 60vw;
+  height: 60vh;
+}
+
+.dialog-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 40px;
 }

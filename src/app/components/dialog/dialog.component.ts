@@ -14,6 +14,7 @@ export class DialogComponent implements OnInit {
   existedData: UserData[] = []; // 用来存放没被删除的数据
   temStr: string = ''; // 保存当前搜索的关键字
   subscription: Subscription;
+  showNoResults: boolean = false;
 
   constructor(private userService: UserService, public dialogRef: MatDialogRef<DialogComponent>) {
     this.subscription = this.userService.onSearch().subscribe((keyword) => {
@@ -23,6 +24,8 @@ export class DialogComponent implements OnInit {
 
       // 临时保存搜索的关键字
       this.temStr = keyword;
+
+      this.showNoResults = this.usersData.length === 0;
     });
   }
 
