@@ -25,6 +25,7 @@ export class DialogComponent implements OnInit {
       // 临时保存搜索的关键字
       this.temStr = keyword;
 
+      // 显示/隐藏no results
       this.showNoResults = this.usersData.length === 0;
     });
   }
@@ -52,6 +53,9 @@ export class DialogComponent implements OnInit {
 
       // 删除后实际的data
       this.existedData = this.existedData.filter((data) => data.id !== userData.id);
+
+      // 这时的展示也要考虑no results
+      this.showNoResults = this.usersData.length === 0;
     });
   }
 }

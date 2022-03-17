@@ -9,16 +9,24 @@ import {Subscription} from "rxjs";
   styleUrls: ['./user-item.component.css']
 })
 export class UserItemComponent implements OnInit {
-  // todo: 是这样初始化吗
+  // todo: 是这样初始化吗 | null
   @Input() userData: UserData = {email: "", first_name: "", last_name: "", update: false};
   @Output() onDeleteUser: EventEmitter<UserData> = new EventEmitter<UserData>();
   showUpdate: boolean = false;
-  subscription: Subscription;
+  updateSubscription: Subscription;
+  searchSubscription!: Subscription;
+  keyword: string = '';
 
+  // todo: 多个subscription?
   constructor(private userService: UserService) {
-    this.subscription = this.userService.onUpdate().subscribe((id) => {
+    this.updateSubscription = this.userService.onUpdate().subscribe((id) => {
       if (this.userData.id === id)
         this.userData.update = true;
+    });
+
+    // 给highlightText pipe使用
+    this.searchSubscription = this.userService.onSearch().subscribe((keyword) => {
+      this.keyword = keyword;
     });
   }
 
@@ -38,7 +46,6 @@ export class UserItemComponent implements OnInit {
       // 直接在这里处理，不用再去userService的updateUser里了
 
       // todo: TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
-      // todo: 为什么try catch没用？ => ErrorHandler
       try {
         this.userService.subjectUpdate.next(response.id!);
       } catch (error) {

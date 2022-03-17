@@ -16,6 +16,7 @@ import {FootComponent} from './components/foot/foot.component';
 import {DialogComponent} from './components/dialog/dialog.component';
 import {UserItemComponent} from './components/user-item/user-item.component';
 import {SearchUserComponent} from './components/search-user/search-user.component';
+import { HighlightTextPipe } from './pipes/highlight-text.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {SearchUserComponent} from './components/search-user/search-user.componen
     FootComponent,
     DialogComponent,
     UserItemComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    HighlightTextPipe
   ],
   imports: [
     BrowserModule,

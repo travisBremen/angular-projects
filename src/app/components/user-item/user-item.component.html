@@ -1,7 +1,11 @@
 <div class="user">
   <div class="user-info">
     <h4>
-      {{userData.first_name}} {{userData.last_name}}<span *ngIf="userData.update"> (Updated)</span>
+      <span [innerHTML]="userData.first_name | highlightText:keyword "></span>&nbsp;
+      <span [innerHTML]="userData.last_name | highlightText:keyword "></span>
+      <!--      {{ userData.first_name | highlightText:'' }}-->
+      <!--      {{ userData.last_name | highlightText:'' }}-->
+      <span *ngIf="userData.update"> (Updated)</span>
     </h4>
     <p>{{userData.email}}</p>
     <img src="{{userData.avatar}}" alt="">
