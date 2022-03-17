@@ -1,10 +1,10 @@
-<div class="user">
+<div class="user" *ngIf="userData">
   <div class="user-info">
     <h4>
       <span [innerHTML]="userData.first_name | highlightText:keyword "></span>&nbsp;
       <span [innerHTML]="userData.last_name | highlightText:keyword "></span>
-      <!--      {{ userData.first_name | highlightText:'' }}-->
-      <!--      {{ userData.last_name | highlightText:'' }}-->
+      <!--      {{ userData.first_name | highlightText:keyword }}-->
+      <!--      {{ userData.last_name | highlightText:keyword }}-->
       <span *ngIf="userData.update"> (Updated)</span>
     </h4>
     <p>{{userData.email}}</p>

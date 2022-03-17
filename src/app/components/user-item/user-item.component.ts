@@ -9,19 +9,21 @@ import {Subscription} from "rxjs";
   styleUrls: ['./user-item.component.css']
 })
 export class UserItemComponent implements OnInit {
-  // todo: 是这样初始化吗 | null
-  @Input() userData: UserData = {email: "", first_name: "", last_name: "", update: false};
+  @Input() userData: UserData | null = null;
   @Output() onDeleteUser: EventEmitter<UserData> = new EventEmitter<UserData>();
   showUpdate: boolean = false;
   updateSubscription: Subscription;
-  searchSubscription!: Subscription;
+  searchSubscription: Subscription;
   keyword: string = '';
 
-  // todo: 多个subscription?
   constructor(private userService: UserService) {
     this.updateSubscription = this.userService.onUpdate().subscribe((id) => {
-      if (this.userData.id === id)
-        this.userData.update = true;
+      if (this.userData === null) {
+        console.log('User is null. Failed to show updated.');
+      } else {
+        if (this.userData.id === id)
+          this.userData.update = true;
+      }
     });
 
     // 给highlightText pipe使用
@@ -34,6 +36,11 @@ export class UserItemComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.userData === null) {
+      console.log('User is null. Failed to submit any input.');
+      return;
+    }
+
     if (!this.userData.first_name && !this.userData.last_name && !this.userData.email) {
       alert('Please enter at least one item!')
       return
@@ -44,12 +51,10 @@ export class UserItemComponent implements OnInit {
       console.log(response);
       // 请求成功的话，告诉大家是哪个id的元素改变了
       // 直接在这里处理，不用再去userService的updateUser里了
-
-      // todo: TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
-      try {
-        this.userService.subjectUpdate.next(response.id!);
-      } catch (error) {
-        console.error('Here is the error message', error);
+      if (response.id === undefined) {
+        console.log('Failed to update user!');
+      } else {
+        this.userService.subjectUpdate.next(response.id);
       }
     });
   }

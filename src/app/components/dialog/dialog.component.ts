@@ -33,8 +33,12 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUser().subscribe((users) => {
       console.log(users);
-      this.usersData = users.data;
-      this.existedData = users.data;
+      try {
+        this.usersData = users.data;
+        this.existedData = users.data;
+      } catch (error) {
+        console.error('Failed to get user list from the endpoint.', error);
+      }
     });
   }
 
@@ -42,7 +46,6 @@ export class DialogComponent implements OnInit {
     this.dialogRef.close('Test!');
   }
 
-  // todo: 每个:void也要显示指明吗
   deleteUser(userData: UserData): void {
     this.userService.deleteUser(userData).subscribe(() => {
       // 展示的data => 没被删除且包含搜索关键字的数据
