@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserData} from "../../User";
+import {User} from "../../User";
 import {UserService} from "../../services/user.service";
 import {Subscription} from "rxjs";
 
@@ -9,8 +9,8 @@ import {Subscription} from "rxjs";
   styleUrls: ['./user-item.component.css']
 })
 export class UserItemComponent implements OnInit {
-  @Input() userData: UserData | null = null;
-  @Output() onDeleteUser: EventEmitter<UserData> = new EventEmitter<UserData>();
+  @Input() user: User | null = null;
+  @Output() onDeleteUser: EventEmitter<User> = new EventEmitter<User>();
   showUpdate: boolean = false;
   updateSubscription: Subscription;
   searchSubscription: Subscription;
@@ -18,11 +18,11 @@ export class UserItemComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.updateSubscription = this.userService.onUpdate().subscribe((id) => {
-      if (this.userData === null) {
+      if (this.user === null) {
         console.log('User is null. Failed to show updated.');
       } else {
-        if (this.userData.id === id)
-          this.userData.update = true;
+        if (this.user.id === id)
+          this.user.update = true;
       }
     });
 
@@ -36,18 +36,18 @@ export class UserItemComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.userData === null) {
+    if (this.user === null) {
       console.log('User is null. Failed to submit any input.');
       return;
     }
 
-    if (!this.userData.first_name && !this.userData.last_name && !this.userData.email) {
+    if (!this.user.first_name && !this.user.last_name && !this.user.email) {
       alert('Please enter at least one item!')
       return
     }
 
     // 直接在这里处理update的信息
-    this.userService.updateUser(this.userData).subscribe((response) => {
+    this.userService.updateUser(this.user).subscribe((response) => {
       console.log(response);
       // 请求成功的话，告诉大家是哪个id的元素改变了
       // 直接在这里处理，不用再去userService的updateUser里了
@@ -59,8 +59,8 @@ export class UserItemComponent implements OnInit {
     });
   }
 
-  onDelete(userData: UserData): void {
-    this.onDeleteUser.emit(userData);
+  onDelete(user: User): void {
+    this.onDeleteUser.emit(user);
   }
 
   toggleUpdate(): void {

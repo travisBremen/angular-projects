@@ -4,10 +4,10 @@
 </div>
 <div mat-dialog-content class="dialog-content" [ngClass]="{'dialog-center':showNoResults}">
   <app-user-item
-    *ngFor="let userData of usersData"
-    [userData]="userData"
+    *ngFor="let user of users"
+    [user]="user"
     class="user-item"
-    (onDeleteUser)="deleteUser(userData)">
+    (onDeleteUser)="deleteUser(user)">
   </app-user-item>
   <div *ngIf="showNoResults" class="no-results">No Results</div>
 </div>

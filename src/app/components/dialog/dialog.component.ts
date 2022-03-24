@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {UserData} from "../../User";
+import {User} from "../../User";
 import {UserService} from "../../services/user.service";
 import {Subscription} from "rxjs";
 
@@ -10,8 +10,8 @@ import {Subscription} from "rxjs";
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  usersData: UserData[] = []; // 取回的json里的user data保存在这里了
-  existedData: UserData[] = []; // 用来存放没被删除的数据
+  users: User[] = []; // 取回的json里的user data保存在这里了
+  existedUser: User[] = []; // 用来存放没被删除的数据
   temStr: string = ''; // 保存当前搜索的关键字
   subscription: Subscription;
   showNoResults: boolean = false;
@@ -19,14 +19,14 @@ export class DialogComponent implements OnInit {
   constructor(private userService: UserService, public dialogRef: MatDialogRef<DialogComponent>) {
     this.subscription = this.userService.onSearch().subscribe((keyword) => {
       // 在现存的data中filter关键字
-      this.usersData = this.existedData.filter((user) =>
+      this.users = this.existedUser.filter((user) =>
         user.first_name.includes(keyword) || user.last_name.includes(keyword));
 
       // 临时保存搜索的关键字
       this.temStr = keyword;
 
       // 显示/隐藏no results
-      this.showNoResults = this.usersData.length === 0;
+      this.showNoResults = this.users.length === 0;
     });
   }
 
@@ -34,8 +34,8 @@ export class DialogComponent implements OnInit {
     this.userService.getUser().subscribe((users) => {
       console.log(users);
       try {
-        this.usersData = users.data;
-        this.existedData = users.data;
+        this.users = users;
+        this.existedUser = users;
       } catch (error) {
         console.error('Failed to get user list from the endpoint.', error);
       }
@@ -46,19 +46,19 @@ export class DialogComponent implements OnInit {
     this.dialogRef.close('Test!');
   }
 
-  deleteUser(userData: UserData): void {
-    this.userService.deleteUser(userData).subscribe(() => {
+  deleteUser(user: User): void {
+    this.userService.deleteUser(user).subscribe(() => {
       // 展示的data => 没被删除且包含搜索关键字的数据
-      this.usersData = this.existedData.filter((data) =>
-        data.id !== userData.id
+      this.users = this.existedUser.filter((data) =>
+        data.id !== user.id
         && (data.first_name.includes(this.temStr) || data.last_name.includes(this.temStr))
       );
 
       // 删除后实际的data
-      this.existedData = this.existedData.filter((data) => data.id !== userData.id);
+      this.existedUser = this.existedUser.filter((data) => data.id !== user.id);
 
       // 这时的展示也要考虑no results
-      this.showNoResults = this.usersData.length === 0;
+      this.showNoResults = this.users.length === 0;
     });
   }
 }

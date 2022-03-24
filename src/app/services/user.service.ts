@@ -1,41 +1,38 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
-import {User, UserData} from "../User";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-}
+import {User} from "../User";
+import {WebService} from "./web.service";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = "https://reqres.in/api/users"
   public subjectUpdate = new Subject<number>();
   public subjectSearch = new Subject<string>();
+  private usersPath = this.webService.getRequestUrl() + 'users';
 
-  constructor(private http: HttpClient) {
+  constructor(private webService: WebService, private http: HttpClient) {
   }
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(this.apiUrl);
+  // *user的东西user管，不用放到web service里面
+  getUser(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersPath);
   }
 
-  updateUser(userData: UserData): Observable<UserData> {
-    const url = `${this.apiUrl}/${userData.id}`
-    return this.http.put<UserData>(url, userData, httpOptions);
+  updateUser(user: User): Observable<User> {
+    const url = this.usersPath + '/' + user.id;
+    return this.http.put<User>(url, user, this.webService.getHeader());
   }
 
-  deleteUser(userData: UserData): Observable<UserData> {
-    const url = `${this.apiUrl}/${userData.id}`
-    return this.http.delete<UserData>(url);
+  deleteUser(user: User): Observable<User> {
+    const url = this.usersPath + '/' + user.id;
+    return this.http.delete<User>(url);
   }
 
-  createUser(userData: UserData): Observable<UserData> {
-    return this.http.post<UserData>(this.apiUrl, userData, httpOptions);
+  createUser(user: User): Observable<User> {
+    const url = this.usersPath + '/' + user.id;
+    return this.http.post<User>(url, user, this.webService.getHeader());
   }
 
   onUpdate(): Observable<number> {

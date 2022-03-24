@@ -1,31 +1,31 @@
-<div class="user" *ngIf="userData">
+<div class="user" *ngIf="user">
   <div class="user-info">
     <h4>
-      <span [innerHTML]="userData.first_name | highlightText:keyword "></span>&nbsp;
-      <span [innerHTML]="userData.last_name | highlightText:keyword "></span>
+      <span [innerHTML]="user.first_name | highlightText:keyword "></span>&nbsp;
+      <span [innerHTML]="user.last_name | highlightText:keyword "></span>
       <!--      {{ userData.first_name | highlightText:keyword }}-->
       <!--      {{ userData.last_name | highlightText:keyword }}-->
-      <span *ngIf="userData.update"> (Updated)</span>
+      <span *ngIf="user.update"> (Updated)</span>
     </h4>
-    <p>{{userData.email}}</p>
-    <img src="{{userData.avatar}}" alt="">
+    <p>{{user.email}}</p>
+    <img src="{{user.avatar}}" alt="">
   </div>
   <div class="user-buttons">
     <button type="button" (click)="toggleUpdate()">Update</button>
-    <button type="button" (click)="onDelete(userData)">Delete</button>
+    <button type="button" (click)="onDelete(user)">Delete</button>
   </div>
   <form *ngIf="showUpdate" class="update-form" (ngSubmit)="onSubmit()">
     <div class="form-control">
       <label for="fName">First Name</label>
-      <input type="text" name="fName" [(ngModel)]="userData.first_name" id="fName" placeholder="First Name">
+      <input type="text" name="fName" [(ngModel)]="user.first_name" id="fName" placeholder="First Name">
     </div>
     <div class="form-control">
       <label for="lName">Last Name</label>
-      <input type="text" name="lName" [(ngModel)]="userData.last_name" id="lName" placeholder="Last Name">
+      <input type="text" name="lName" [(ngModel)]="user.last_name" id="lName" placeholder="Last Name">
     </div>
     <div class="form-control">
       <label for="email">Email</label>
-      <input type="text" name="email" [(ngModel)]="userData.email" id="email" placeholder="Email">
+      <input type="text" name="email" [(ngModel)]="user.email" id="email" placeholder="Email">
     </div>
     <input type="submit" value="Update User Info" class="submit">
   </form>
