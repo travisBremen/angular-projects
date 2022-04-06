@@ -8,35 +8,31 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class UserService {
-  public subjectUpdate = new Subject<number>();
   public subjectSearch = new Subject<string>();
-  private usersPath = this.webService.getRequestUrl() + 'users';
+  private usersUrl = this.webService.getRequestUrl() + 'api/users';
 
   constructor(private webService: WebService, private http: HttpClient) {
   }
 
+  // TODO handle responses from server?
   // *user的东西user管，不用放到web service里面
   getUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersPath);
+    return this.http.get<User[]>(this.usersUrl);
   }
 
   updateUser(user: User): Observable<User> {
-    const url = this.usersPath + '/' + user.id;
+    const url = this.usersUrl + '?id=' + user.id;
     return this.http.put<User>(url, user, this.webService.getHeader());
   }
 
   deleteUser(user: User): Observable<User> {
-    const url = this.usersPath + '/' + user.id;
+    const url = this.usersUrl + '?id=' + user.id;
     return this.http.delete<User>(url);
   }
 
   createUser(user: User): Observable<User> {
-    const url = this.usersPath + '/' + user.id;
+    const url = this.usersUrl + '?id=' + user.id;
     return this.http.post<User>(url, user, this.webService.getHeader());
-  }
-
-  onUpdate(): Observable<number> {
-    return this.subjectUpdate.asObservable();
   }
 
   onSearch(): Observable<string> {

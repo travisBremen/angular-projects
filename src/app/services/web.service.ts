@@ -5,7 +5,7 @@ import {HttpHeaders} from "@angular/common/http";
   providedIn: 'root'
 })
 export class WebService {
-  private apiUrl = "http://localhost:3000/api/";
+  private apiUrl = "http://localhost:3000/";
 
   constructor() {
   }

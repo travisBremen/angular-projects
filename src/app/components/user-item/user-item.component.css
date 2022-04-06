@@ -15,12 +15,24 @@ div.user-info {
   padding: 10px;
 }
 
-h4 {
+.user-info h4 {
   margin: 0;
 }
 
-p {
+.user-info p {
   margin: 8px 0;
+}
+
+.user-img {
+  margin-left: auto;
+  margin-right: auto;
+  height: 128px;
+  width: 128px;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 div.user-buttons {
@@ -34,14 +46,8 @@ div.user-buttons {
 }
 
 .user-buttons > button {
-  margin: 0 10px;
-  background-color: #f8f9fa;
-  border: 1px solid #f8f9fa;
   padding: 5px 20px;
   font-size: 13px;
-  border-radius: 4px;
-  color: #3c4043;
-  cursor: pointer;
 }
 
 .update-form {
@@ -66,14 +72,13 @@ div.user-buttons {
   margin: 0 5px 10px;
 }
 
-.submit {
+.file-input {
+  display: none;
+}
+
+.button {
   width: 100%;
-  /*margin: 0 10px;*/
-  background-color: #f8f9fa;
-  border: 1px solid #f8f9fa;
+  margin: 5px 0;
   padding: 5px 10px;
   font-size: 13px;
-  border-radius: 4px;
-  color: #3c4043;
-  cursor: pointer;
 }

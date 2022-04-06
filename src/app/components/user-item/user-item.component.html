@@ -8,25 +8,32 @@
       <span *ngIf="user.update"> (Updated)</span>
     </h4>
     <p>{{user.email}}</p>
-    <img src="{{user.avatar}}" alt="">
+    <div class="user-img">
+      <img src="{{user.avatar}}" alt="user avatar">
+    </div>
   </div>
   <div class="user-buttons">
     <button type="button" (click)="toggleUpdate()">Update</button>
-    <button type="button" (click)="onDelete(user)">Delete</button>
+    <button type="button" (click)="onDelete(user)" style="background-color: #d9d9d9">Delete</button>
   </div>
   <form *ngIf="showUpdate" class="update-form" (ngSubmit)="onSubmit()">
     <div class="form-control">
-      <label for="fName">First Name</label>
-      <input type="text" name="fName" [(ngModel)]="user.first_name" id="fName" placeholder="First Name">
+      <label for="firstName">First Name</label>
+      <input type="text" name="firstName" [(ngModel)]="user.first_name" id="firstName" placeholder="First Name">
     </div>
     <div class="form-control">
-      <label for="lName">Last Name</label>
-      <input type="text" name="lName" [(ngModel)]="user.last_name" id="lName" placeholder="Last Name">
+      <label for="lastName">Last Name</label>
+      <input type="text" name="lastName" [(ngModel)]="user.last_name" id="lastName" placeholder="Last Name">
     </div>
     <div class="form-control">
       <label for="email">Email</label>
       <input type="text" name="email" [(ngModel)]="user.email" id="email" placeholder="Email">
     </div>
-    <input type="submit" value="Update User Info" class="submit">
+    <input type="file" class="file-input" accept="image/jpeg,image/gif,image/png" (change)="onFileSelected($event)"
+           #fileUpload>
+    <div class="file-upload">
+      <button type="button" class="button" (click)="fileUpload.click()">Change Avatar</button>
+    </div>
+    <input type="submit" value="Update User Info" class="button" style="background-color: #d9d9d9">
   </form>
 </div>

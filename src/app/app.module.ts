@@ -18,6 +18,8 @@ import {UserItemComponent} from './components/user-item/user-item.component';
 import {SearchUserComponent} from './components/search-user/search-user.component';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
 
+//TODO Router
+
 @NgModule({
   declarations: [
     AppComponent,
